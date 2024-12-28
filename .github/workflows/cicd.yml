@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build docker image
-        run: docker build -t bbsimon/react-app --build-args REACT_APP_NODE_ENV='production' --build-args REACT_APP_SERVER_BASE_URL='${{ secrets.REACT_APP_SERVER_BASE_URL}}' .
+        run: docker build -t bbsimon/react-app --build-arg REACT_APP_NODE_ENV='production' --build-arg REACT_APP_SERVER_BASE_URL='${{ secrets.REACT_APP_SERVER_BASE_URL}}' .
       - name: Push docker image to docker hub
         run: docker push bbsimon/react-app:latest
   deploy:
