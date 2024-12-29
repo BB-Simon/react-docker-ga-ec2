@@ -16,10 +16,13 @@ COPY . .
 RUN yarn run build
 
 # Serve from nginx
-FROM nginx:alpine
+FROM nginx:1.23.3-alpine
+WORKDIR /usr/share/nginx/html
+
+RUN rm -rf *
 
 # Copy the build output from the build stage to the nginx web server directory
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/build .
 
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
